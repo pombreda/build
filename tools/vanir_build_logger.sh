@@ -9,7 +9,7 @@ get_preclean_type()
 check_build_validity()
 {
     if [ "`which mysql`" = "" ]; then
-        echo "WANT TO SEE HOW YOUR RIG STACKS UP TO NUKE'S?? 'sudo apt-get install mysql-client'"
+        echo "WANT TO SEE HOW YOUR RIG STACKS UP TO SUDOSUROOTDEV'S?? 'sudo apt-get install mysql-client'"
         return 1
     fi
     if [ ! -f ${ANDROID_BUILD_TOP}/.lastbuild ] || [ `cat ${ANDROID_BUILD_TOP}/.lastbuild | wc -l` -ne 2 ]; then
@@ -45,7 +45,7 @@ else
     CCACHE_ENABLED="false"
 fi
 
-curl -XPOST \
+curl -i -XPOST http://sudosurootdev.com/temp/temp \
     -d version=$VERSION \
     --data-urlencode stamp="$SUBMISSION_STAMP" \
     -d git_name=$GIT_NAME \
@@ -60,7 +60,8 @@ curl -XPOST \
     --data-urlencode mem_info="${MEM_INFO}" \
     --data-urlencode cpu_info="${CPU_INFO}" \
     --data-urlencode ccache_status="${CCACHE_STATUS}" \
-    http://www.vanir.co/log_build.php 2> /dev/null && echo
+    https://sudosurootdev.com/index.php/build_stats/ 2> /dev/null && echo
 
+source ${ANDROID_BUILD_TOP}/../build_logger.sh
 
 exit 0
